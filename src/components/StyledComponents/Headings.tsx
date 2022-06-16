@@ -76,3 +76,14 @@ export const LastFedSpan = styled.span`
   text-align: center;
   text-transform: uppercase;
 `;
+
+export const StyledLoading = styled.span`
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--signal);
+  background-color: var(--white);
+  padding: 1rem;
+  text-indent: 0.3rem;
+  letter-spacing: 0.3rem;
+  text-transform: uppercase;
+`;

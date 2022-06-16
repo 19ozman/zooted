@@ -26,11 +26,19 @@ export const MainWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   width: 95vw;
   height: 83vh;
   border: 0.8rem solid var(--signal);
   overflow: auto;
   margin: auto;
+`;
+
+export const LoadWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95vw;
 `;
 
 export const AnimalCnt = styled.div`

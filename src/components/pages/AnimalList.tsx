@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useState, useEffect, useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ZooContext } from "../../contexts/ZooContext";
 import { IAnimal } from "../../models/IAnimal";
@@ -7,30 +6,23 @@ import {
   imageOnLoadHandler,
   imageOnErrorHandler,
 } from "../../services/ImageHandler";
-import { getZoo, setZoo } from "../../services/StorageService";
+import { getZoo } from "../../services/StorageService";
 import { InfoSpanOne, NameSpanOne } from "../StyledComponents/Headings";
 import { ImgOneWrap, ImgOne } from "../StyledComponents/Images";
 import { AnimalCnt, AnimalWrap, InfoWrap } from "../StyledComponents/Wrappers";
 
 export const AnimalList = () => {
   const context = useContext(ZooContext);
-  const [animals, setAnimals] = useState<IAnimal[]>([]);
 
-  const URL = "https://animals.azurewebsites.net/api/animals";
-
-  useEffect(() => {
-    if (animals.length !== 0) return;
-    axios.get<IAnimal[]>(URL).then((res) => {
-      setZoo(res.data);
-      setAnimals(getZoo);
-      context.updateContext({ ...context, animals: res.data });
-    });
-  });
+  // useEffect(() => {
+  //   let theZoo: IAnimal[] = getZoo<IAnimal>();
+  //   if (theZoo.length > 0) return;
+  // }, []);
 
   return (
     <>
       <AnimalCnt>
-        {animals.map((animal) => {
+        {context.animals.map((animal) => {
           return (
             <AnimalWrap key={animal.id}>
               <Link

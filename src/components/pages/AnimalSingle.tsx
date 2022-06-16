@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ZooContext } from "../../contexts/ZooContext";
@@ -14,6 +13,7 @@ import {
   InfoSpanTWo,
   LastFedSpan,
   NameSpanOne,
+  StyledLoading,
 } from "../StyledComponents/Headings";
 import { ImgOne, ImgTwoWrap } from "../StyledComponents/Images";
 import {
@@ -24,7 +24,7 @@ import {
 
 export const AnimalSingle = () => {
   const [animal, setAnimal] = useState<IAnimal>();
-  const [getApi, setGetApi] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const context = useContext(ZooContext);
 
@@ -35,24 +35,7 @@ export const AnimalSingle = () => {
   const FED_THANKS = "tack för maten!";
   const BTN_TXT = "mata mig";
   const BACK = "tillbaka";
-
-  const URL = "https://animals.azurewebsites.net/api/animals";
-
-  // useEffect(() => {
-  //   let theZoo: IAnimal[] = getZoo<IAnimal>();
-  //   if (theZoo.length === 0) {
-  //     axios.get<IAnimal[]>(URL).then((res) => {
-  //       setZoo(res.data);
-  //       setGetApi(true);
-  //     });
-  //   } else if (theZoo.length > 0) {
-  //     for (let i = 0; i < theZoo.length; i++) {
-  //       if (theZoo[i].id.toString() === zooParams) {
-  //         setAnimal(theZoo[i]);
-  //       }
-  //     }
-  //   }
-  // }, [getApi, zooParams]);
+  const MSG = "rendering animal!";
 
   useEffect(() => {
     let theZoo: IAnimal[] = getZoo<IAnimal>();
@@ -61,21 +44,27 @@ export const AnimalSingle = () => {
         if (theZoo[i].id.toString() === zooParams) {
           context.updateContext({ ...context, animals: theZoo });
           setAnimal(theZoo[i]);
+          setLoading(false);
         }
-        console.log(context.animals.length);
       }
     }
   }, []);
 
   const feedAnimal = () => {
+    const isoDate = new Date();
+    let newlyFed = isoDate.toISOString().split(".")[0] + "Z";
     let theZoo: IAnimal[] = getZoo<IAnimal>();
     if (theZoo.length > 0) {
       for (let i = 0; i < theZoo.length; i++) {
         if (theZoo[i].id.toString() === zooParams) {
-          context.updateContext({ ...context, animals: theZoo });
           setAnimal(theZoo[i]);
-
-          console.log(context.animals.length);
+          if (theZoo[i].isFed === false) {
+            theZoo[i].isFed = !theZoo[i].isFed;
+            theZoo[i].lastFed = newlyFed;
+            setZoo(theZoo);
+            context.updateContext({ ...context, animals: theZoo });
+            setAnimal(theZoo[i]);
+          }
         }
       }
     }
@@ -86,6 +75,7 @@ export const AnimalSingle = () => {
       <AnimalCnt key={animal?.id}>
         <NameSpanOne>{animal?.name}</NameSpanOne>
         <AnimalWrapTwo>
+          {loading ? <StyledLoading>{MSG}</StyledLoading> : null}
           <ImgTwoWrap>
             <ImgOne
               onLoad={imageOnLoadHandler}
