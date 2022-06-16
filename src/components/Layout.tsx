@@ -1,16 +1,9 @@
-import axios from "axios";
-import { useContext, useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { ZooContext } from "../contexts/ZooContext";
-import { IAnimal } from "../models/IAnimal";
-import { setZoo, getZoo } from "../services/StorageService";
-import { Home } from "./pages/Home";
+import { Home } from "./Home";
 
-import { FootSpan, HeadSpan, StyledLoading } from "./StyledComponents/Headings";
+import { FootSpan, HeadSpan } from "./StyledComponents/Headings";
 import {
   FootWrap,
   HeadWrap,
-  LoadWrap,
   MainWrap,
   MegaWrap,
 } from "./StyledComponents/Wrappers";
