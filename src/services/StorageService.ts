@@ -1,10 +1,10 @@
-const LS_KEY = "zoot";
+const LS_KEY = "OUR_ZOO";
 
-export const getZoot = <T>(): T[] => {
-  let zootList = localStorage.getItem(LS_KEY) || "[]";
-  return JSON.parse(zootList) as T[];
+export const getZoo = <T>(): T[] => {
+  let zooList = localStorage.getItem(LS_KEY) || "[]";
+  return JSON.parse(zooList) as T[];
 };
 
-export const setZoot = <T>(newZoot: T): void => {
-  localStorage.setItem(LS_KEY, JSON.stringify(newZoot));
+export const setZoo = <T>(newZoo: T): void => {
+  localStorage.setItem(LS_KEY, JSON.stringify(newZoo));
 };

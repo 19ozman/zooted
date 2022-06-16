@@ -6,7 +6,7 @@ const FALLBACK_IMAGE = DINO;
 export const imageOnLoadHandler = (
   e: SyntheticEvent<HTMLImageElement, Event>
 ) => {
-  console.log(`Images loaded`);
+  console.log(`Images ${e} loaded`);
 };
 
 export const imageOnErrorHandler = (
