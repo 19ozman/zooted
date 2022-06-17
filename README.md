@@ -1,6 +1,6 @@
 # SOME ZOO APP THIS IS
 
-YADA YADA
+Bada bing bada bom!
 
 ## Available Scripts
 
