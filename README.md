@@ -1,8 +1,6 @@
 # SOME ZOO APP THIS IS
 
-Context does not seem to be working on page reload for some reason I can't explain.
-Still working on a fix for the moment.
-Will update on this later.
+YADA YADA
 
 ## Available Scripts
 

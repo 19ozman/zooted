@@ -19,6 +19,7 @@ import { ImgOne, ImgTwoWrap } from "../StyledComponents/Images";
 import {
   AnimalCnt,
   AnimalWrapTwo,
+  LoadWrap,
   LongInfoWrap,
 } from "../StyledComponents/Wrappers";
 
@@ -45,6 +46,7 @@ export const AnimalSingle = () => {
           context.updateContext({ ...context, animals: theZoo });
           setAnimal(theZoo[i]);
           setLoading(false);
+          console.log(theZoo);
         }
       }
     }
@@ -52,7 +54,7 @@ export const AnimalSingle = () => {
 
   const feedAnimal = () => {
     const isoDate = new Date();
-    let newlyFed = isoDate.toISOString().split(".")[0] + "Z";
+    let newlyFed = isoDate.toISOString();
     let theZoo: IAnimal[] = getZoo<IAnimal>();
     if (theZoo.length > 0) {
       for (let i = 0; i < theZoo.length; i++) {
@@ -75,7 +77,11 @@ export const AnimalSingle = () => {
       <AnimalCnt key={animal?.id}>
         <NameSpanOne>{animal?.name}</NameSpanOne>
         <AnimalWrapTwo>
-          {loading ? <StyledLoading>{MSG}</StyledLoading> : null}
+          {loading ? (
+            <LoadWrap>
+              <StyledLoading>{MSG}</StyledLoading>
+            </LoadWrap>
+          ) : null}
           <ImgTwoWrap>
             <ImgOne
               onLoad={imageOnLoadHandler}
