@@ -31,8 +31,7 @@ export const AnimalList = () => {
   const MSG = "letting out doggos and cattos!";
 
   useEffect(() => {
-    let theZoo: IAnimal[] = getZoo<IAnimal>(); // hämtar zoo från localStorage
-
+    let theZoo: IAnimal[] = getZoo<IAnimal>();
     if (theZoo.length !== 0) {
       setAnimals(getZoo);
       setLoading(false);
