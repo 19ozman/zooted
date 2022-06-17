@@ -13,19 +13,16 @@ import {
   InfoSpanTWo,
   LastFedSpan,
   NameSpanOne,
-  StyledLoading,
 } from "../StyledComponents/Headings";
 import { ImgOne, ImgTwoWrap } from "../StyledComponents/Images";
 import {
   AnimalCnt,
   AnimalWrapTwo,
-  LoadWrap,
   LongInfoWrap,
 } from "../StyledComponents/Wrappers";
 
 export const AnimalSingle = () => {
   const [animal, setAnimal] = useState<IAnimal>();
-  const [loading, setLoading] = useState(true);
 
   const context = useContext(ZooContext);
 
@@ -36,7 +33,6 @@ export const AnimalSingle = () => {
   const FED_THANKS = "tack för maten!";
   const BTN_TXT = "mata mig";
   const BACK = "tillbaka";
-  const MSG = "rendering animal!";
 
   useEffect(() => {
     let theZoo: IAnimal[] = getZoo<IAnimal>();
@@ -45,7 +41,6 @@ export const AnimalSingle = () => {
         if (theZoo[i].id.toString() === zooParams) {
           context.updateContext({ ...context, animals: theZoo });
           setAnimal(theZoo[i]);
-          setLoading(false);
           console.log(theZoo);
         }
       }
@@ -77,11 +72,6 @@ export const AnimalSingle = () => {
       <AnimalCnt key={animal?.id}>
         <NameSpanOne>{animal?.name}</NameSpanOne>
         <AnimalWrapTwo>
-          {loading ? (
-            <LoadWrap>
-              <StyledLoading>{MSG}</StyledLoading>
-            </LoadWrap>
-          ) : null}
           <ImgTwoWrap>
             <ImgOne
               onLoad={imageOnLoadHandler}
